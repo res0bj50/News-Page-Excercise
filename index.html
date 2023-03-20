@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | News homepage</title>
+
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+
+</head>
+<body>
+  <div class="page-container">
+    <header class="nav">
+      <div class="logo">
+        <img src="./assets/images/logo.svg" alt="logo">
+      </div>
+      <nav>
+        <div class="menu" data-visible="false">
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">New</a></li>
+            <li><a href="#">Popular</a></li>
+            <li><a href="#">Trending</a></li>
+            <li><a href="#">Categories</a></li>
+          </ul>
+        </div>
+        <button class="menu-toggle" data-visible="false"></button>
+      </nav>
+    </header>
+
+    <main class="main-content">
+
+      <div class="head-news">
+        <div class="head-news-image">
+          <img src="./assets/images/image-web-3-desktop.jpg" alt="head-image">
+        </div>
+        <h1 class="head-news-title">The Bright Future of Web 3.0?</h1>
+        <p class="head-news-content">We dive into the next evolution of the web that claims to put the power of the platforms back into the hands of the people. But is it really fulfilling its promise?
+        </p>
+        <a class="head-news-button" href="#">Read More</a>
+      </div>
+
+      <div class="side-news">
+        <h2 class="side-news-title">New</h2>
+        <article class="side-news-info">
+          <h3 class="side-news-subtitle"><a href="#">Hydrogen VS Electric Cars</a></h3>
+          <p class="side-news-content">Will hydrogen-fueled cars ever catch up to EVs?</p>
+        </article>
+        <article class="side-news-info">
+          <h3 class="side-news-subtitle"><a href="#">The Downsides of AI Artistry</a></h3>
+          <p class="side-news-content">What are the possible adverse effects of on-demand AI image generation?</p>
+        </article>
+        <article class="side-news-info">
+          <h3 class="side-news-subtitle"><a href="#">Is VC Funding Drying Up?</a></h3>
+          <p class="side-news-content">Private funding by VC firms is down 50% YOY. We take a look at what that means.</p>
+        </article>
+      </div>
+
+      <div class="bottom-news grid-flow">
+        <div class="bottom-news-panel">
+          <div class="bottom-news-image">
+            <img src="./assets/images/image-retro-pcs.jpg" alt="bottom-image">
+          </div>
+          <article class="bottom-news-info">
+            <p class="bottom-news-number">01</p>
+            <h3 class="bottom-news-title"><a href="#">Reviving Retro PCs</a></h3>
+            <p class="bottom-news-content">What happens when old PCs are given modern upgrades?</p>
+          </article>
+        </div>
+
+        <div class="bottom-news-panel">
+          <div class="bottom-news-image">
+            <img src="./assets/images/image-top-laptops.jpg" alt="bottom-image">
+          </div>
+          <article class="bottom-news-info">
+            <p class="bottom-news-number">02</p>
+            <h3 class="bottom-news-title"><a href="#">Reviving Retro PCs</a></h3>
+            <p class="bottom-news-content">Our best picks for various needs and budgets.</p>
+          </article>
+        </div>
+
+        <div class="bottom-news-panel">
+          <div class="bottom-news-image">
+            <img src="./assets/images/image-gaming-growth.jpg" alt="bottom-image">
+          </div>
+          <article class="bottom-news-info">
+            <p class="bottom-news-number">03</p>
+            <h3 class="bottom-news-title"><a href="#">The Growth of Gaming</a></h3>
+            <p class="bottom-news-content">How the pandemic has sparked fresh opportunities.</p>
+          </article>
+        </div>
+      </div>
+    </main>
+  </div>
+  
+  
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Kevin Park</a>.
+  </div>
+</body>
+
+<script>
+  // menu toggle script
+  const toggleButton = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.menu');
+  const headImage = document.querySelector('.head-news-image>img');
+
+  setHeadImage();
+
+
+
+  toggleButton.addEventListener('click', () => {
+      let menuVisible = toggleButton.getAttribute('data-visible');
+      
+      if(menuVisible === 'true'){
+          toggleButton.setAttribute('data-visible', 'false');
+          menu.setAttribute('data-visible', 'false');
+      } else {
+          toggleButton.setAttribute('data-visible', 'true');
+          menu.setAttribute('data-visible', 'true');
+      }
+  });
+
+  //close menu when the screen is bigger
+  window.addEventListener('resize', () => {
+    let currentViewPortSize = window.innerWidth;
+    let menuVisible = toggleButton.getAttribute('data-visible');
+    if(currentViewPortSize > 540 && menuVisible === 'true') {
+        toggleButton.setAttribute('data-visible', 'false');
+        menu.setAttribute('data-visible', 'false');
+    }
+
+    setHeadImage();
+  })
+
+  function setHeadImage() {
+    let viewPortSize = window.innerWidth;
+    if(viewPortSize > 850){
+      headImage.setAttribute('src', './assets/images/image-web-3-desktop.jpg');
+    } else {
+      headImage.setAttribute('src', './assets/images/image-web-3-mobile.jpg');
+    }
+  }
+
+  //remove animations
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    document.body.classList.add("resize-animation-stopper");
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove("resize-animation-stopper");
+    }, 400);
+  });
+</script>
+
+</html>
